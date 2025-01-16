@@ -8,9 +8,20 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(cors({
-  origin: "https://social-media-handle.netlify.app/", 
+  origin: (origin, callback) => {
+    const allowedOrigins = [
+      "https://social-media-handle.netlify.app",
+      "http://localhost:5000",
+    ];
+    if (allowedOrigins.includes(origin) || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
   credentials: true,
 }));
+
 app.use(express.json());
 
 // MongoDB URI and Client Setup
