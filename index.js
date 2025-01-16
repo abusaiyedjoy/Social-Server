@@ -7,13 +7,10 @@ require("dotenv").config();
 const app = express();
 const port = process.env.PORT || 3000;
 
-const allowedOrigins = ["http://localhost:5173", "https://social-media-handle.netlify.app/"]; 
-app.use(
-  cors({
-    origin: allowedOrigins,
-    credentials: true,
-  })
-);
+app.use(cors({
+  origin: "https://social-media-handle.netlify.app/", 
+  credentials: true,
+}));
 app.use(express.json());
 
 // MongoDB URI and Client Setup
